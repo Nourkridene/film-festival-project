@@ -1,12 +1,13 @@
-import Mythology.perso as perso
+# steps1.py
+from perso import PersonnageMythologique
+from behave import given, when, then
 
-
-@given('un {nom1} et une {humeur1}')
+@given('un personnage nommé "{nom1}" et une humeur "{humeur1}"')
 def step_given_nom_et_humeur(context, nom1, humeur1):
     context.nom = nom1
     context.humeur = humeur1
 
-@given('un {nom1}')
+@given('un personnage nommé "{nom1}"')
 def step_given_nom_seul(context, nom1):
     context.nom = nom1
     context.humeur = "happy"  # Valeur par défaut
@@ -15,12 +16,10 @@ def step_given_nom_seul(context, nom1):
 def step_given_rien_ou_humeur(context):
     context.nom = None
 
-
 @when('utilisateur le valide')
 def step_when_valide(context):
     if context.nom:
-        context.heros = perso.PersonnageMythologique(context.nom, context.humeur)
-
+        context.heros = PersonnageMythologique(context.nom, context.humeur)
     else:
         context.heros = None
 

@@ -5,31 +5,30 @@ Feature: US_000 Créer un héros
   Afin de m'immiscer dans mon propre univers mythologique
 
   Scenario Outline: Création du personnage mythologique
-    Given un <nom1> et une <humeur1>
+    Given un personnage nommé "<nom1>" et une humeur "<humeur1>"
     When utilisateur le valide
     Then un personnage mythologique est créé
 
     Examples:
-    | nom1    | humeur1 |  PersonnageMythologique |
-    | Ulysse  | happy   |  Héros1                 |
-    | Achille | bad     |  Héros2                 |
+      | nom1    | humeur1 |
+      | Ulysse  | happy   |
+      | Achille | bad     |
 
   Scenario Outline: Création partielle du personnage mythologique
-    Given un <nom1>
+    Given un personnage nommé "<nom1>"
     When utilisateur le valide
     Then un personnage mythologique est créé avec une humeur par défaut : happy
 
-     Examples:
-     | nom1    | PersonnageMythologique | humeur  |
-     | Ulysse  | Héros1                 | happy   |
-     | Achille | Héros2                 | happy   |
+    Examples:
+      | nom1    |
+      | Ulysse  |
+      | Achille |
 
   Scenario Outline: Erreur de création du personnage mythologique
     Given rien ou seulement une humeur
     When utilisateur le valide
     Then le système refuse avec un <messageErreur>
 
-      Examples:
-      | humeur |  messageErreur                                          |
-      |         |   Il manque des informations pour créer votre héros     |
-      | good    |   Il manque des informations pour créer votre héros     |
+    Examples:
+      | messageErreur                                          |
+      | Il manque des informations pour créer votre héros      |
